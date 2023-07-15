@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res, next) => {
-    res.send('Hello World!');
+    var name = req.query.name | 'World';
+    res.send(`Hello ${name}!`);
 });
 
 app.listen(3000, () => {
