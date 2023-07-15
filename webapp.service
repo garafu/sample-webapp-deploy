@@ -1,0 +1,13 @@
+[Unit]
+Description=Node Web Application
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/app
+ExecStart=/usr/bin/npm start
+ExecStop=/bin/kill -s QUIT $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
