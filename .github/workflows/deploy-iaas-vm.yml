@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  NODEJS_VERSION: 12
+  NODEJS_VERSION: 18
 
 jobs:
   build-deploy:
@@ -30,7 +30,7 @@ jobs:
       - name: Build Node.js app
         run: npm run build
       - name: Transfer build files
-        uses:  appleboy/scp-action@v0.1.4
+        uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.AZURE_VM_IP }}
           username: ${{ secrets.AZURE_VM_USERNAME }}
