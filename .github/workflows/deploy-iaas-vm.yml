@@ -37,6 +37,7 @@ jobs:
           key: ${{ secrets.AZURE_VM_KEY }}
           source: "./*"
           target: "/app"
+          overwrite: true
       - name: Restart service
         uses: appleboy/ssh-action@v0.1.10
         with:
