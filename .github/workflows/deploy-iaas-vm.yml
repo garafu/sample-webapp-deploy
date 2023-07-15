@@ -1,0 +1,39 @@
+name: Azure VM Deploy
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  NODEJS_VERSION: 12
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODEJS_VERSION }}
+          cache: "npm"
+          cache-dependencty-path: |
+            **/package-lock.json
+            **/yarn.lock
+      - name: Install dependencies
+        run: npm ci
+      - name: Build Node.js app
+        run: npm run build
+      - name: Transfer build files
+        uses:  appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.AZURE_VM_IP }}
+          username: ${{ secrets.AZURE_VM_USERNAME }}
+          key: ${{ secrets.AZURE_VM_KEY }}
+          source: "./*"
+          target: "/app"
