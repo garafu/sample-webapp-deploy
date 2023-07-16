@@ -143,13 +143,35 @@ OpenID Connect を使ったデプロイ
         * 名前： (任意)
 
 
-
 ## 作成したアプリにロールを付与
 
-1. 
+1. サブスクリプションを開く
+1. [アクセス制御(IAM)]を開く
+1. 「追加」→「ロールの割り当ての追加」を開く
+1. ロールの割り当ての追加
+    1. ロール
+        * 「特権管理者ロール」タブへ移動して `共同作成者` を選択
+    1. メンバー
+        * 割当先： `ユーザー、グループ、またはサービスプリンシパル`
+        * メンバー： (作成したアプリ)
 
 
-azure/login@v1
+## パイプラインの作成
+
+```
+jobs:
+  build-deploy:
+    ...
+    steps:
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+```
+
+`azure/login@v1` に与えるパラーメタ―は以下の通り
 
 |パラメーター| 値 |
 |---|---|
