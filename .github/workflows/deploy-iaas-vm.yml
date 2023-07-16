@@ -29,6 +29,8 @@ jobs:
         run: npm ci
       - name: Build Node.js app
         run: npm run build
+      - name: Test Node.js app
+        run: npm run test
       - name: Transfer build files
         uses: appleboy/scp-action@v0.1.4
         with:
