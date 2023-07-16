@@ -1,11 +1,26 @@
 # アプリ作成
 
-```
-npx express-generator sample-webapp --view ejs
-cd sample-webapp
-npm install
-```
+1. ひな型の作成
 
+    ```
+    npx express-generator sample-webapp --view ejs
+    cd sample-webapp
+    npm install
+    ```
+
+1. ビルド、テストコマンドを `/package.json` に追加
+
+    ```
+    {
+        ...省略...
+        "scripts": {
+            "start": "node ./bin/www",
+            "build": "echo 'building ...'",
+            "test": "echo 'testing ...'"
+        },
+        ...省略...
+    }
+    ```
 
 # VM サーバー
 
